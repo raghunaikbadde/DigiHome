@@ -18,14 +18,15 @@
 
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/HomeTheme">
-
-        </activity>
+            android:theme="@style/HomeTheme"></activity>
+        <activity
+            android:name=".RoomAppliancesActivity"
+            android:label="@string/title_activity_room_appliances"
+            android:theme="@style/HomeTheme"></activity>
     </application>
 
 </manifest>
