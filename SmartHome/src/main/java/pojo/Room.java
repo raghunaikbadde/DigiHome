@@ -1,7 +1,6 @@
 package pojo;
 
 import com.smart.digihome.HomeActivity;
-import com.smart.digihome.R;
 
 public class Room {
     public String getRoomName() {
@@ -10,8 +9,8 @@ public class Room {
 
     public void setRoomName(String roomName) {
         this.roomName = roomName;
-        for(int i = 0; i<HomeActivity.COUNTRIES.length;i++){
-            if(roomName.equalsIgnoreCase(HomeActivity.COUNTRIES[i])){
+        for(int i = 0; i<HomeActivity.ROOMS.length; i++){
+            if(roomName.equalsIgnoreCase(HomeActivity.ROOMS[i])){
               imageId= HomeActivity.roomImages[i];
             }
         }

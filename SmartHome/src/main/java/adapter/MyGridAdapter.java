@@ -1,6 +1,5 @@
 package adapter;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -10,26 +9,22 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.smart.digihome.HomeActivity;
 import com.smart.digihome.R;
 import com.smart.digihome.RoomAppliancesActivity;
+import com.smart.digihome.SelectModularActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
 import pojo.Room;
 
@@ -91,7 +86,7 @@ public class MyGridAdapter extends ListAdapter<Room,MyGridAdapter.ViewHolder> {
 // Set up the input
                     // final EditText input = (EditText) viewInflated.findViewById(R.id.input);
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                            android.R.layout.simple_dropdown_item_1line, HomeActivity.COUNTRIES);
+                            android.R.layout.simple_dropdown_item_1line, HomeActivity.ROOMS);
                     final AutoCompleteTextView textView = (AutoCompleteTextView)
                             viewInflated.findViewById(R.id.input);
                     textView.setText(getItem(getAdapterPosition()).getRoomName());
@@ -138,7 +133,7 @@ public class MyGridAdapter extends ListAdapter<Room,MyGridAdapter.ViewHolder> {
             final Room room = getItem(getAdapterPosition());
             switch (view.getId()){
                 case R.id.cardview:
-                    Intent intent = new Intent(view.getContext(), RoomAppliancesActivity.class);
+                    Intent intent = new Intent(view.getContext(), SelectModularActivity.class);
                     intent.putExtra(KEY_ROOM_IMAGE_ID,room.getImageId());
                     intent.putExtra(KEY_ROOM_NAME,room.getRoomName());
                     view.getContext().startActivity(intent);
@@ -153,7 +148,7 @@ public class MyGridAdapter extends ListAdapter<Room,MyGridAdapter.ViewHolder> {
 // Set up the input
                     // final EditText input = (EditText) viewInflated.findViewById(R.id.input);
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                            android.R.layout.simple_dropdown_item_1line, HomeActivity.COUNTRIES);
+                            android.R.layout.simple_dropdown_item_1line, HomeActivity.ROOMS);
                     final AutoCompleteTextView textView = (AutoCompleteTextView)
                             viewInflated.findViewById(R.id.input);
                     textView.setText(room.getRoomName());
@@ -192,10 +187,11 @@ public class MyGridAdapter extends ListAdapter<Room,MyGridAdapter.ViewHolder> {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
-                            //mRoomArrayList.remove(getAdapterPosition());
+
                             mRoomArrayList.remove(getAdapterPosition());
+                            //mRoomArrayList.remove(getAdapterPosition());
                             submitList(mRoomArrayList);
-                            notifyItemRemoved(getAdapterPosition());
+                           // notifyItemRemoved(getAdapterPosition());
                             if(mRoomArrayList.size()==0){
                                 clickEvents.onDeleteClick(view);
                             }

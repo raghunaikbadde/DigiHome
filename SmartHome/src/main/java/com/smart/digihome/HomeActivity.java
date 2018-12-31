@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity implements MyGridAdapter.cli
     MyGridAdapter myGridAdapter;
     TextView mTitleAddNewRoom;
     String enteredRoom;
-    public static final String[] COUNTRIES = new String[] {
+    public static final String[] ROOMS = new String[] {
             "Bed Room", "Wash Room", "Kitchen", "Hall", "Master Bed Room"
     };
     public static final int[] roomImages = new int[] {
@@ -71,7 +71,7 @@ public class HomeActivity extends AppCompatActivity implements MyGridAdapter.cli
 // Set up the input
                     // final EditText input = (EditText) viewInflated.findViewById(R.id.input);
                     final ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(),
-                            android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+                            android.R.layout.simple_dropdown_item_1line, ROOMS);
                     final AutoCompleteTextView textView = (AutoCompleteTextView)
                             viewInflated.findViewById(R.id.input);
                     textView.setAdapter(adapter);

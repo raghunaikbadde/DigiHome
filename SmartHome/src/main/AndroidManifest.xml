@@ -27,6 +27,11 @@
             android:name=".RoomAppliancesActivity"
             android:label="@string/title_activity_room_appliances"
             android:theme="@style/HomeTheme"></activity>
+        <activity
+            android:name=".SelectModularActivity"
+            android:label="@string/title_activity_room_appliances"
+            android:theme="@style/HomeTheme"></activity>
+
     </application>
 
 </manifest>

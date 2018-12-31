@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import adapter.MyGridAdapter;
+import dialogs.DevicesListDialog;
 
 public class RoomAppliancesActivity extends AppCompatActivity {
 
@@ -20,16 +21,16 @@ public class RoomAppliancesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_room_appliances);
         imageView = findViewById(R.id.detailsImageRoom);
         textView = findViewById(R.id.roomName);
-        int imageId = getIntent().getExtras().getInt(MyGridAdapter.KEY_ROOM_IMAGE_ID);
-        String roomName = getIntent().getExtras().getString(MyGridAdapter.KEY_ROOM_NAME);
-        imageView.setImageResource(imageId);
-        textView.setText(roomName);
+      //  int imageId = getIntent().getExtras().getInt(MyGridAdapter.KEY_ROOM_IMAGE_ID);
+       // String roomName = getIntent().getExtras().getString(MyGridAdapter.KEY_ROOM_NAME);
+        //imageView.setImageResource(imageId);
+        //textView.setText(roomName);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                DevicesListDialog devicesListDialog = new DevicesListDialog();
+                devicesListDialog.show(getSupportFragmentManager(),"RoomAppliancesActivity");
             }
         });
     }

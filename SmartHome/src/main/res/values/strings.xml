@@ -5,4 +5,44 @@
     <string name="enter_room_name">Enter new room name</string>
     <string name="update_room_name">Update room name</string>
     <string name="title_activity_room_appliances">RoomAppliancesActivity</string>
+    <string-array
+        name="device_names">
+        <item>Electrical Outlet</item>
+        <item>Multiple Socket</item>
+        <item>Wall Switch</item>
+        <item>Lighting Device</item>
+        <item>Fan</item>
+        <item>Smart Camera</item>
+        <item>Oil Heater</item>
+        <item>Kettle</item>
+
+        <item>Rice Cooker</item>
+        <item>Oven</item>
+        <item>Microwave</item>
+        <item>Soymilk Maker</item>
+        <item>Bread Maker</item>
+        <item>Gas Stove</item>
+        <item>Milk Dispenser</item>
+
+        <item>InfraredUniversal Remote Control</item>
+        <item>Sous Vide</item>
+        <item>Air Conditioner</item>
+        <item>Refrigerator</item>
+        <item>Washing Machine</item>
+        <item>Plant Grower</item>
+        <item>Water Heater</item>
+
+
+        <item>Wifi Connector</item>
+        <item>Bodyfat Scale</item>
+        <item>Air Purifier</item>
+        <item>Story Machine</item>
+        <item>Heater</item>
+        <item>Robot Vaccum</item>
+        <item>Zigbee Gateway</item>
+
+        <item>Water Purifier</item>
+
+    </string-array>
+
 </resources>
