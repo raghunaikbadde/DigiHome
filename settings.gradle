@@ -1,1 +1,1 @@
-include ':SmartHome'
+include ':SmartHome',':SeekArc_library'

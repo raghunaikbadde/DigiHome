@@ -2,7 +2,14 @@ package pojo;
 
 import com.smart.digihome.HomeActivity;
 
+import java.util.ArrayList;
+
 public class Room {
+
+    private ArrayList<SixModularSwitchBoard> sixModularSwitchBoardArrayList = new ArrayList<>();
+    private ArrayList<FourModularSwitchBoard> fourModularSwitchBoardArrayList = new ArrayList<>();
+    private ArrayList<TwoModularSwitchBoard> twoModularSwitchBoardArrayList = new ArrayList<>();
+
     public String getRoomName() {
         return roomName;
     }
@@ -37,4 +44,27 @@ public class Room {
     String imageType;
     int imageId=0;
 
+    public ArrayList<SixModularSwitchBoard> getSixModularSwitchBoardArrayList() {
+        return sixModularSwitchBoardArrayList;
+    }
+
+    public void setSixModularSwitchBoardArrayList(ArrayList<SixModularSwitchBoard> sixModularSwitchBoardArrayList) {
+        this.sixModularSwitchBoardArrayList = sixModularSwitchBoardArrayList;
+    }
+
+    public ArrayList<FourModularSwitchBoard> getFourModularSwitchBoardArrayList() {
+        return fourModularSwitchBoardArrayList;
+    }
+
+    public void setFourModularSwitchBoardArrayList(ArrayList<FourModularSwitchBoard> fourModularSwitchBoardArrayList) {
+        this.fourModularSwitchBoardArrayList = fourModularSwitchBoardArrayList;
+    }
+
+    public ArrayList<TwoModularSwitchBoard> getTwoModularSwitchBoardArrayList() {
+        return twoModularSwitchBoardArrayList;
+    }
+
+    public void setTwoModularSwitchBoardArrayList(ArrayList<TwoModularSwitchBoard> twoModularSwitchBoardArrayList) {
+        this.twoModularSwitchBoardArrayList = twoModularSwitchBoardArrayList;
+    }
 }

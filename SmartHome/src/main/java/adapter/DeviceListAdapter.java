@@ -11,30 +11,31 @@ import android.widget.TextView;
 
 import com.smart.digihome.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import pojo.Appliance;
+
 public class DeviceListAdapter extends BaseAdapter{
-    private HashMap<String,Integer> mListOfDevices;
-    private String[] mDeviceNames;
+    private ArrayList<Appliance> appliances;
     private Context mContext;
-    public DeviceListAdapter(HashMap<String,Integer> mListOfDevice,String[] devices, Context context){
-        this.mListOfDevices = mListOfDevice;
+    public DeviceListAdapter(ArrayList<Appliance> appliances, Context context){
+        this.appliances = appliances;
         this.mContext = context;
-        this.mDeviceNames = devices;
     }
     @Override
     public int getCount() {
-        return mListOfDevices.size();
+        return appliances.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mListOfDevices.get(position);
+        return appliances.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return mListOfDevices.get(mDeviceNames[position]);
+        return appliances.get(0).hashCode();
     }
 
     @Override
@@ -53,8 +54,9 @@ public class DeviceListAdapter extends BaseAdapter{
                 convertView.findViewById(R.id.deviceName);
 
         //sets the text for item name and item description from the current item object
-        deviceImageView.setImageResource(mListOfDevices.get(mDeviceNames[position]));
-        deviceName.setText(mDeviceNames[position]);
+//        if(mDeviceNames[0])
+        deviceImageView.setImageResource(appliances.get(0).getAppImageRes());
+        deviceName.setText(appliances.get(position).getDeviceName());
 
         // returns the view for the current row
         return convertView;

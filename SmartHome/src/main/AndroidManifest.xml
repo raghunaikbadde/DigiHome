@@ -6,6 +6,7 @@
         android:allowBackup="true"
         android:icon="@drawable/smart_home"
         android:label="@string/app_name"
+        android:name=".DigiHomeApp"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -31,7 +32,13 @@
             android:name=".SelectModularActivity"
             android:label="@string/title_activity_room_appliances"
             android:theme="@style/HomeTheme"></activity>
-
+        <activity android:name=".CRollerTest"
+            android:label="@string/title_activity_room_appliances"
+            android:theme="@style/HomeTheme">
+        </activity>
+        <activity android:name=".HomePagerActivity"
+            android:theme="@style/HomeTheme"
+        ></activity>
     </application>
 
 </manifest>

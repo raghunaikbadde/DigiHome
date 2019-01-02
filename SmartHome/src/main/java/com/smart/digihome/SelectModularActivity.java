@@ -18,6 +18,7 @@ public class SelectModularActivity extends AppCompatActivity implements Constant
     TextView roomNameTxt;
     LinearLayout sixModularLL,fourModularLL, twoModularLL;
     String roomName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +27,36 @@ public class SelectModularActivity extends AppCompatActivity implements Constant
         fourModularLL = (LinearLayout) findViewById(R.id.fourmodular);
         twoModularLL = (LinearLayout) findViewById(R.id.twomodular);
         roomNameTxt = (TextView) findViewById(R.id.roomName);
-        sixModularLL.setOnClickListener(this);
-        fourModularLL.setOnClickListener(this);
-        twoModularLL.setOnClickListener(this);
+        sixModularLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), RoomAppliancesActivity.class);
+                intent.putExtra(KEY_ROOM_IMAGE_ID,"");//room.getImageId());
+                intent.putExtra(KEY_ROOM_NAME,"");//room.getRoomName());
+                intent.putExtra(SWITCH_BOARD_TYPE,SWITCH_BOARD_SIX_MODULAR_TYPE);
+                startActivity(intent);
+            }
+        });
+        fourModularLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), RoomAppliancesActivity.class);
+                intent.putExtra(KEY_ROOM_IMAGE_ID,"");//room.getImageId());
+                intent.putExtra(KEY_ROOM_NAME,"");//room.getRoomName());
+                intent.putExtra(SWITCH_BOARD_TYPE,SWITCH_BOARD_FOUR_MODULAR_TYPE);
+                startActivity(intent);
+            }
+        });
+        twoModularLL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), RoomAppliancesActivity.class);
+                intent.putExtra(KEY_ROOM_IMAGE_ID,"");//room.getImageId());
+                intent.putExtra(KEY_ROOM_NAME,"");//room.getRoomName());
+                intent.putExtra(SWITCH_BOARD_TYPE,SWITCH_BOARD_TWO_MODULAR_TYPE);
+                startActivity(intent);
+            }
+        });
         roomName = getIntent().getExtras().getString(KEY_ROOM_NAME);
         roomNameTxt.setText(roomName);
     }
