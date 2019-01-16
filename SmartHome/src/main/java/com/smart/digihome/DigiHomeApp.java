@@ -1,14 +1,26 @@
 package com.smart.digihome;
 
 import android.app.Application;
-import android.content.res.Resources;
+import android.arch.persistence.room.Room;
 
-public class DigiHomeApp extends Application{
+import database.AppDataBase;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
+public class DigiHomeApp extends Application {
 
+    private static DigiHomeApp digiHomeApp;
+    private static AppDataBase appDataBase;
+    public static DigiHomeApp getInstance(){
+        if(digiHomeApp==null){
+            digiHomeApp = new DigiHomeApp();
+        }
+        return digiHomeApp;
+    }
+
+    public AppDataBase getAppDatabase(){
+        if(appDataBase == null) {
+            appDataBase = AppDataBase.getDatabase(this);
+        }
+        return appDataBase;
     }
 
 }

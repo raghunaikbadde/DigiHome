@@ -1,15 +1,27 @@
 package adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.support.v7.widget.SwitchCompat;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.TextView;
+
+import com.smart.digihome.R;
+import com.triggertrap.seekarc.SeekArc;
 
 import java.util.ArrayList;
 
+import Log.Logger;
+import pojo.ElectricFan;
+import pojo.ElectricLight;
 import pojo.FourModularSwitchBoard;
 import pojo.Room;
 import pojo.SixModularSwitchBoard;
+import pojo.Switch;
+import pojo.SwitchBoard;
 import pojo.TwoModularSwitchBoard;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter{
@@ -45,47 +57,46 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter{
     @Override
     public int getChildrenCount(int position) {
         if(position > sixModularSwitchesCount+fourModularSwitchesCount){
-            twoModularSwitchBoardArrayList.get(position).getSwitches().size();
+            return twoModularSwitchBoardArrayList.get(position).getSwitches().size();
         } else if(position > sixModularSwitchesCount){
-            fourModularSwitchBoardArrayList.get(position).getSwitches().size();
+            return fourModularSwitchBoardArrayList.get(position).getSwitches().size();
         } else {
-            sixModularSwitchBoardArrayList.get(position).getSwitches().size();
+            return sixModularSwitchBoardArrayList.get(position).getSwitches().size();
         }
-        return 0;
     }
 
     @Override
     public Object getGroup(int position) {
         if(position > sixModularSwitchesCount+fourModularSwitchesCount){
-            twoModularSwitchBoardArrayList.get(position).getSwitches();
+            return twoModularSwitchBoardArrayList.get(position);
         } else if(position > sixModularSwitchesCount){
-            fourModularSwitchBoardArrayList.get(position).getSwitches();
+            return fourModularSwitchBoardArrayList.get(position);
         } else {
-            sixModularSwitchBoardArrayList.get(position).getSwitches();
+            return sixModularSwitchBoardArrayList.get(position);
         }
-        return null;
     }
 
     @Override
     public Object getChild(int position, int childPosition) {
         if(position > sixModularSwitchesCount+fourModularSwitchesCount){
-            twoModularSwitchBoardArrayList.get(position).getSwitches().get(childPosition);
+            return twoModularSwitchBoardArrayList.get(position).getSwitches().get(childPosition);
         } else if(position > sixModularSwitchesCount){
-            fourModularSwitchBoardArrayList.get(position).getSwitches().get(childPosition);
+            return fourModularSwitchBoardArrayList.get(position).getSwitches().get(childPosition);
         } else {
-            sixModularSwitchBoardArrayList.get(position).getSwitches().get(childPosition);
+            return sixModularSwitchBoardArrayList.get(position).getSwitches().get(childPosition);
         }
-        return null;
     }
 
     @Override
     public long getGroupId(int i) {
+        Logger.Companion.LogMessage("group id "+i);
         return i;
     }
 
     @Override
     public long getChildId(int i, int i1) {
-        return i+i1;
+        Logger.Companion.LogMessage("child group id"+i+"child id "+i1);
+        return i1;
     }
 
     @Override
@@ -94,17 +105,99 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter{
     }
 
     @Override
-    public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        return null;
+    public View getGroupView(int listPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+
+        SwitchBoard switchBoard = (SwitchBoard) getGroup(listPosition);
+        if (convertView == null) {
+            LayoutInflater layoutInflater = (LayoutInflater) mContext.
+                    getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = layoutInflater.inflate(R.layout.list_group, null);
+        }
+        TextView listTitleTextView = (TextView) convertView
+                .findViewById(R.id.listTitle);
+        listTitleTextView.setTypeface(null, Typeface.BOLD);
+        listTitleTextView.setText(switchBoard.getSwitchBoardName());
+        return convertView;
     }
 
     @Override
-    public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        return null;
+    public View getChildView(int listPosition, int expandedListPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        Switch expandedListSwitch = (Switch) getChild(listPosition, expandedListPosition);
+        if (convertView == null) {
+            LayoutInflater layoutInflater = (LayoutInflater) mContext
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            if(expandedListSwitch.getAppliance().getTypeOfAppliance().equals(ElectricLight.DEVICE_TYPE)) {
+                convertView = layoutInflater.inflate(R.layout.light_appliance_layout, null);
+                SwitchCompat switchCompat = convertView.findViewById(R.id.lightswitcher);
+                switchCompat.setChecked(expandedListSwitch.getAppliance().isPowerOn());
+            }
+            else {
+                convertView = layoutInflater.inflate(R.layout.fan_appliance_layout, null);
+                SwitchCompat switchCompat = convertView.findViewById(R.id.fanswitcher);
+                switchCompat.setChecked(expandedListSwitch.getAppliance().isPowerOn());
+                SeekArc seekArc = convertView.findViewById(R.id.seekArc);
+                seekArc.setProgress(((ElectricFan)expandedListSwitch.getAppliance()).getProgressStep());
+                final TextView textView = convertView.findViewById(R.id.label);
+                textView.setText(((ElectricFan)expandedListSwitch.getAppliance()).getProgressStep()+"%");
+                seekArc.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser) {
+                        textView.setText((int)(((double)progress/100)*100)+"%");
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekArc seekArc) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekArc seekArc) {
+
+                    }
+                });
+            }
+        } else {
+            LayoutInflater layoutInflater = (LayoutInflater) mContext
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            if(expandedListSwitch.getAppliance().getTypeOfAppliance().equals(ElectricLight.DEVICE_TYPE)) {
+                convertView = layoutInflater.inflate(R.layout.light_appliance_layout, null);
+                SwitchCompat switchCompat = convertView.findViewById(R.id.lightswitcher);
+                switchCompat.setChecked(expandedListSwitch.getAppliance().isPowerOn());
+            }
+            else {
+                convertView = layoutInflater.inflate(R.layout.fan_appliance_layout, null);
+                SwitchCompat switchCompat = convertView.findViewById(R.id.fanswitcher);
+                switchCompat.setChecked(expandedListSwitch.getAppliance().isPowerOn());
+                SeekArc seekArc = convertView.findViewById(R.id.seekArc);
+                seekArc.setProgress(((ElectricFan)expandedListSwitch.getAppliance()).getProgressStep());
+                final TextView textView = convertView.findViewById(R.id.label);
+                textView.setText(((ElectricFan)expandedListSwitch.getAppliance()).getProgressStep()+"%");
+                seekArc.setOnSeekArcChangeListener(new SeekArc.OnSeekArcChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekArc seekArc, int progress, boolean fromUser) {
+                        textView.setText((int)(((double)progress/100)*100)+"%");
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekArc seekArc) {
+
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekArc seekArc) {
+
+                    }
+                });
+            }
+        }
+
+        return convertView;
+
     }
 
     @Override
     public boolean isChildSelectable(int i, int i1) {
+
         return false;
     }
 }

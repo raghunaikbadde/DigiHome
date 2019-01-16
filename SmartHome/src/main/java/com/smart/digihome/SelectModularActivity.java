@@ -27,12 +27,13 @@ public class SelectModularActivity extends AppCompatActivity implements Constant
         fourModularLL = (LinearLayout) findViewById(R.id.fourmodular);
         twoModularLL = (LinearLayout) findViewById(R.id.twomodular);
         roomNameTxt = (TextView) findViewById(R.id.roomName);
+        roomName = getIntent().getExtras().getString(KEY_ROOM_NAME);
         sixModularLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RoomAppliancesActivity.class);
                 intent.putExtra(KEY_ROOM_IMAGE_ID,"");//room.getImageId());
-                intent.putExtra(KEY_ROOM_NAME,"");//room.getRoomName());
+                intent.putExtra(KEY_ROOM_NAME,roomName);//room.getRoomName());
                 intent.putExtra(SWITCH_BOARD_TYPE,SWITCH_BOARD_SIX_MODULAR_TYPE);
                 startActivity(intent);
             }
@@ -42,7 +43,7 @@ public class SelectModularActivity extends AppCompatActivity implements Constant
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RoomAppliancesActivity.class);
                 intent.putExtra(KEY_ROOM_IMAGE_ID,"");//room.getImageId());
-                intent.putExtra(KEY_ROOM_NAME,"");//room.getRoomName());
+                intent.putExtra(KEY_ROOM_NAME,roomName);//room.getRoomName());
                 intent.putExtra(SWITCH_BOARD_TYPE,SWITCH_BOARD_FOUR_MODULAR_TYPE);
                 startActivity(intent);
             }
@@ -52,12 +53,12 @@ public class SelectModularActivity extends AppCompatActivity implements Constant
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RoomAppliancesActivity.class);
                 intent.putExtra(KEY_ROOM_IMAGE_ID,"");//room.getImageId());
-                intent.putExtra(KEY_ROOM_NAME,"");//room.getRoomName());
+                intent.putExtra(KEY_ROOM_NAME,roomName);//room.getRoomName());
                 intent.putExtra(SWITCH_BOARD_TYPE,SWITCH_BOARD_TWO_MODULAR_TYPE);
                 startActivity(intent);
             }
         });
-        roomName = getIntent().getExtras().getString(KEY_ROOM_NAME);
+
         roomNameTxt.setText(roomName);
     }
 

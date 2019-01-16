@@ -94,7 +94,7 @@ public class HomeActivity extends AppCompatActivity implements MyGridAdapter.cli
                             myGridAdapter.submitList(roomArrayList);
                             gridRecyclerView.setAdapter(myGridAdapter);
                             //adapter.notifyDataSetChanged();
-                            //Snackbar.make(textView.getRootView(), enteredRoom, Snackbar.LENGTH_LONG)
+                            //Snackbar.make(mRoomNametextView.getRootView(), enteredRoom, Snackbar.LENGTH_LONG)
                             //      .setAction("Action", null).show();
                         }
                     });

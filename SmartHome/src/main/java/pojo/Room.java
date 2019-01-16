@@ -1,13 +1,25 @@
 package pojo;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.smart.digihome.HomeActivity;
 
 import java.util.ArrayList;
 
+@Entity
 public class Room {
 
+    @PrimaryKey(autoGenerate = true)
+    private int roomid;
+
+    @Embedded(prefix = "sixModularSwitchBoardArrayList")
     private ArrayList<SixModularSwitchBoard> sixModularSwitchBoardArrayList = new ArrayList<>();
+    @Embedded(prefix = "fourModularSwitchBoardArrayList")
     private ArrayList<FourModularSwitchBoard> fourModularSwitchBoardArrayList = new ArrayList<>();
+    @Embedded(prefix = "twoModularSwitchBoardArrayList")
     private ArrayList<TwoModularSwitchBoard> twoModularSwitchBoardArrayList = new ArrayList<>();
 
     public String getRoomName() {
@@ -40,8 +52,11 @@ public class Room {
         this.imageType = imageType;
     }
 
+    @ColumnInfo(name = "roomName")
     String roomName;
+    @ColumnInfo(name = "imageType")
     String imageType;
+    @ColumnInfo(name = "imageId")
     int imageId=0;
 
     public ArrayList<SixModularSwitchBoard> getSixModularSwitchBoardArrayList() {
@@ -66,5 +81,13 @@ public class Room {
 
     public void setTwoModularSwitchBoardArrayList(ArrayList<TwoModularSwitchBoard> twoModularSwitchBoardArrayList) {
         this.twoModularSwitchBoardArrayList = twoModularSwitchBoardArrayList;
+    }
+
+    public int getRoomid() {
+        return roomid;
+    }
+
+    public void setRoomid(int roomid) {
+        this.roomid = roomid;
     }
 }
